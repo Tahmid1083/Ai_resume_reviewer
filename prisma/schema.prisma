@@ -1,0 +1,35 @@
+// AI Resume Reviewer — Prisma schema
+// Works locally with SQLite (file) and on Cloudflare D1 with @prisma/adapter-d1.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Anonymous usage tracking keyed by IP fingerprint.
+// In production you'd swap this for a real User model with auth (Clerk/NextAuth).
+model Usage {
+  id        String   @id @default(cuid())
+  ip        String   @unique
+  credits   Int      @default(5) // free credits per IP
+  totalUsed Int      @default(0)
+  reviews   Review[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  usageId    String
+  resumeText String
+  result     String // full LLM JSON output (saved for history)
+  score      Int?
+  createdAt  DateTime @default(now())
+  usage      Usage    @relation(fields: [usageId], references: [id], onDelete: Cascade)
+
+  @@index([usageId])
+}

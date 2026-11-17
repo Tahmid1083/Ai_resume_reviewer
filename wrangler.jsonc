@@ -1,0 +1,41 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ai-resume-reviewer",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2025-09-01",
+  "compatibility_flags": ["nodejs_compat", "nodejs_compat_v2"],
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "vars": {
+    "CLOUDFLARE": "1"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "resume-db",
+      "database_id": "REPLACE_WITH_YOUR_D1_ID",
+      "migrations_dir": "prisma/migrations"
+    }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "RATE_LIMIT",
+      "id": "REPLACE_WITH_YOUR_KV_ID"
+    }
+  ],
+  "ai": {
+    "binding": "AI"
+  },
+  "env": {
+    "production": {
+      "vars": {
+        "CLOUDFLARE": "1"
+      }
+    }
+  }
+}
