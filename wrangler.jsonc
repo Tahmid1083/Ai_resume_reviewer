@@ -22,12 +22,6 @@
       "migrations_dir": "prisma/migrations"
     }
   ],
-  "kv_namespaces": [
-    {
-      "binding": "RATE_LIMIT",
-      "id": "REPLACE_WITH_YOUR_KV_ID"
-    }
-  ],
   "ai": {
     "binding": "AI"
   },
