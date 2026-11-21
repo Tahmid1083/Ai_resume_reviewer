@@ -18,7 +18,7 @@
     {
       "binding": "DB",
       "database_name": "resume-db",
-      "database_id": "REPLACE_WITH_YOUR_D1_ID",
+      "database_id": "aaf63161-a28f-4eb7-b929-077a30224528",
       "migrations_dir": "prisma/migrations"
     }
   ],
